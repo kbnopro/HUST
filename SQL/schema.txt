@@ -1,0 +1,246 @@
+Table: actor
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+actor_id     smallint(5) unsigned  NO      PRI                         auto_increment
+first_name   varchar(45)           NO
+last_name    varchar(45)           NO      MUL
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: actor_info
+Field       Type                  Null    Key      Default  Extra
+----------  --------------------  ------  -----  ---------  -------
+actor_id    smallint(5) unsigned  NO                     0
+first_name  varchar(45)           NO
+last_name   varchar(45)           NO
+film_info   mediumtext            YES
+
+
+Table: address
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+address_id   smallint(5) unsigned  NO      PRI                         auto_increment
+address      varchar(50)           NO
+address2     varchar(50)           YES
+district     varchar(20)           NO
+city_id      smallint(5) unsigned  NO      MUL
+postal_code  varchar(10)           YES
+phone        varchar(20)           NO
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: category
+Field        Type                 Null    Key    Default              Extra
+-----------  -------------------  ------  -----  -------------------  -----------------------------
+category_id  tinyint(3) unsigned  NO      PRI                         auto_increment
+name         varchar(25)          NO
+last_update  timestamp            NO             current_timestamp()  on update current_timestamp()
+
+
+Table: city
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+city_id      smallint(5) unsigned  NO      PRI                         auto_increment
+city         varchar(50)           NO
+country_id   smallint(5) unsigned  NO      MUL
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: country
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+country_id   smallint(5) unsigned  NO      PRI                         auto_increment
+country      varchar(50)           NO
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: customer
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+customer_id  smallint(5) unsigned  NO      PRI                         auto_increment
+store_id     tinyint(3) unsigned   NO      MUL
+first_name   varchar(45)           NO
+last_name    varchar(45)           NO      MUL
+email        varchar(50)           YES
+address_id   smallint(5) unsigned  NO      MUL
+active       tinyint(1)            NO             1
+create_date  datetime              NO
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: customer_list
+Field     Type                  Null    Key    Default    Extra
+--------  --------------------  ------  -----  ---------  -------
+ID        smallint(5) unsigned  NO             0
+name      varchar(91)           YES
+address   varchar(50)           NO
+zip code  varchar(10)           YES
+phone     varchar(20)           NO
+city      varchar(50)           NO
+country   varchar(50)           NO
+notes     varchar(6)            NO
+SID       tinyint(3) unsigned   NO
+
+
+Table: film
+Field                 Type                                                                 Null    Key    Default              Extra
+--------------------  -------------------------------------------------------------------  ------  -----  -------------------  -----------------------------
+film_id               smallint(5) unsigned                                                 NO      PRI                         auto_increment
+title                 varchar(128)                                                         NO      MUL
+description           text                                                                 YES
+release_year          year(4)                                                              YES
+language_id           tinyint(3) unsigned                                                  NO      MUL
+original_language_id  tinyint(3) unsigned                                                  YES     MUL
+rental_duration       tinyint(3) unsigned                                                  NO             3
+rental_rate           decimal(4,2)                                                         NO             4.99
+length                smallint(5) unsigned                                                 YES
+replacement_cost      decimal(5,2)                                                         NO             19.99
+rating                enum('G','PG','PG-13','R','NC-17')                                   YES            G
+special_features      set('Trailers','Commentaries','Deleted Scenes','Behind the Scenes')  YES
+last_update           timestamp                                                            NO             current_timestamp()  on update current_timestamp()
+
+
+Table: film_actor
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+actor_id     smallint(5) unsigned  NO      PRI
+film_id      smallint(5) unsigned  NO      PRI
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: film_category
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+film_id      smallint(5) unsigned  NO      PRI
+category_id  tinyint(3) unsigned   NO      PRI
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: film_list
+Field        Type                                Null    Key    Default    Extra
+-----------  ----------------------------------  ------  -----  ---------  -------
+FID          smallint(5) unsigned                NO             0
+title        varchar(128)                        NO
+description  text                                YES
+category     varchar(25)                         YES
+price        decimal(4,2)                        NO             4.99
+length       smallint(5) unsigned                YES
+rating       enum('G','PG','PG-13','R','NC-17')  YES            G
+actors       mediumtext                          YES
+
+
+Table: film_text
+Field        Type                  Null    Key    Default    Extra
+-----------  --------------------  ------  -----  ---------  -------
+film_id      smallint(5) unsigned  NO      PRI
+title        varchar(255)          NO      MUL
+description  text                  YES
+
+
+Table: inventory
+Field         Type                   Null    Key    Default              Extra
+------------  ---------------------  ------  -----  -------------------  -----------------------------
+inventory_id  mediumint(8) unsigned  NO      PRI                         auto_increment
+film_id       smallint(5) unsigned   NO      MUL
+store_id      tinyint(3) unsigned    NO      MUL
+last_update   timestamp              NO             current_timestamp()  on update current_timestamp()
+
+
+Table: language
+Field        Type                 Null    Key    Default              Extra
+-----------  -------------------  ------  -----  -------------------  -----------------------------
+language_id  tinyint(3) unsigned  NO      PRI                         auto_increment
+name         char(20)             NO
+last_update  timestamp            NO             current_timestamp()  on update current_timestamp()
+
+
+Table: nicer_but_slower_film_list
+Field        Type                                Null    Key    Default    Extra
+-----------  ----------------------------------  ------  -----  ---------  -------
+FID          smallint(5) unsigned                NO             0
+title        varchar(128)                        NO
+description  text                                YES
+category     varchar(25)                         YES
+price        decimal(4,2)                        NO             4.99
+length       smallint(5) unsigned                YES
+rating       enum('G','PG','PG-13','R','NC-17')  YES            G
+actors       mediumtext                          YES
+
+
+Table: payment
+Field         Type                  Null    Key    Default              Extra
+------------  --------------------  ------  -----  -------------------  -----------------------------
+payment_id    smallint(5) unsigned  NO      PRI                         auto_increment
+customer_id   smallint(5) unsigned  NO      MUL
+staff_id      tinyint(3) unsigned   NO      MUL
+rental_id     int(11)               YES     MUL
+amount        decimal(5,2)          NO
+payment_date  datetime              NO
+last_update   timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: rental
+Field         Type                   Null    Key    Default              Extra
+------------  ---------------------  ------  -----  -------------------  -----------------------------
+rental_id     int(11)                NO      PRI                         auto_increment
+rental_date   datetime               NO      MUL
+inventory_id  mediumint(8) unsigned  NO      MUL
+customer_id   smallint(5) unsigned   NO      MUL
+return_date   datetime               YES
+staff_id      tinyint(3) unsigned    NO      MUL
+last_update   timestamp              NO             current_timestamp()  on update current_timestamp()
+
+
+Table: sales_by_film_category
+Field        Type           Null    Key    Default    Extra
+-----------  -------------  ------  -----  ---------  -------
+category     varchar(25)    NO
+total_sales  decimal(27,2)  YES
+
+
+Table: sales_by_store
+Field        Type           Null    Key    Default    Extra
+-----------  -------------  ------  -----  ---------  -------
+store        varchar(101)   YES
+manager      varchar(91)    YES
+total_sales  decimal(27,2)  YES
+
+
+Table: staff
+Field        Type                  Null    Key    Default              Extra
+-----------  --------------------  ------  -----  -------------------  -----------------------------
+staff_id     tinyint(3) unsigned   NO      PRI                         auto_increment
+first_name   varchar(45)           NO
+last_name    varchar(45)           NO
+address_id   smallint(5) unsigned  NO      MUL
+picture      blob                  YES
+email        varchar(50)           YES
+store_id     tinyint(3) unsigned   NO      MUL
+active       tinyint(1)            NO             1
+username     varchar(16)           NO
+password     varchar(40)           YES
+last_update  timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
+Table: staff_list
+Field     Type                 Null    Key      Default  Extra
+--------  -------------------  ------  -----  ---------  -------
+ID        tinyint(3) unsigned  NO                     0
+name      varchar(91)          YES
+address   varchar(50)          NO
+zip code  varchar(10)          YES
+phone     varchar(20)          NO
+city      varchar(50)          NO
+country   varchar(50)          NO
+SID       tinyint(3) unsigned  NO
+
+
+Table: store
+Field             Type                  Null    Key    Default              Extra
+----------------  --------------------  ------  -----  -------------------  -----------------------------
+store_id          tinyint(3) unsigned   NO      PRI                         auto_increment
+manager_staff_id  tinyint(3) unsigned   NO      UNI
+address_id        smallint(5) unsigned  NO      MUL
+last_update       timestamp             NO             current_timestamp()  on update current_timestamp()
+
+
