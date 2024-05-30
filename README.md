@@ -1,11 +1,15 @@
-# Repo for working with python in HUST
+# Repo for working with Python in HUST
+
+## Activate Python virtual environment
+Before installing dependencies, activate the virtual environment by running:
+```sh
+hustenv/scripts/activate
+```
 
 ## Install dependencies
 
-To run the contents in this repository, please install python packages listed in [requirements.txt](/requirements.txt)
+To run the contents in this repository, please install the dependencies listed in [requirements.txt](/requirements.txt) by running:
 
-Install dependencies using the following syntax:
-```
+```sh
 pip install -r requirements.txt
 ```
-Python virtual environment recommended.
