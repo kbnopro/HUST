@@ -1,0 +1,2 @@
+ipykernel==6.29.4
+pipreqs==0.5.0
