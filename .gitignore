@@ -1,3 +1,9 @@
 # test folders and files
 test.*
 test
+
+# models cache
+__pycache__
+
+# vscode
+.vscode
