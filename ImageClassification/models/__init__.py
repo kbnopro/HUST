@@ -1,3 +1,4 @@
-from __VGG16__ import VGG16
+import torch
+from __VGG16__ import *
 
 __all__ = ['VGG16']
