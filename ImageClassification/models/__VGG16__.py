@@ -2,7 +2,7 @@ from torch import nn
 
 class VGG16(nn.Module):
     def __init__(self, num_classes):
-        super(VGG16,self).__init__()
+        super().__init__()
         self.sequential_224 = nn.Sequential(
             nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, padding='same'), nn.ReLU(),
             nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, padding='same'), nn.ReLU(),
