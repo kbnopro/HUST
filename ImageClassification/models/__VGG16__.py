@@ -33,9 +33,10 @@ class VGG16(nn.Module):
         )
         self.sequential_linear = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(in_features=512*7*7, out_features=4096), nn.ReLU(),
-            nn.Linear(in_features=4096, out_features=4096), nn.ReLU(),
-            nn.Linear(in_features=4096, out_features=num_classes), nn.ReLU(),
+            nn.Linear(in_features=512*7*7, out_features=2**14), nn.ReLU(),
+            nn.Linear(in_features=2**14, out_features=2**13), nn.ReLU(),
+            nn.Linear(in_features=2**13, out_features=2**13), nn.ReLU(),
+            nn.Linear(in_features=2**13, out_features=num_classes), nn.ReLU(),
             nn.Softmax()
         )
 
